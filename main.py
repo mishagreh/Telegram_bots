@@ -7,13 +7,13 @@ from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart, Command
 from aiogram.types import Message
 from aiogram.utils.markdown import hbold
-
-from config import TELEGRAM_TOKEN, OPEN_WEATHER_TOKEN
+from dotenv import dotenv_values
 
 
 # All handlers should be attached to the Router (or Dispatcher)
 # Initializes a dispatcher instance
 dp = Dispatcher()
+config = dotenv_values('.env')
 
 
 @dp.message(Command('weather'))
@@ -24,7 +24,7 @@ async def command_weather_handler(message: Message) -> None:
         async with aiohttp.ClientSession() as session:
             async with session.get(
                     f'https://api.openweathermap.org/data/2.5/weather?'
-                    f'lat=49.8161282&lon=73.1026622&appid={OPEN_WEATHER_TOKEN}&units=metric') as response:
+                    f'lat=49.8161282&lon=73.1026622&appid={config["OPEN_WEATHER_TOKEN"]}&units=metric') as response:
 
                 data = await response.json()
                 date_time = datetime.datetime.now()
@@ -73,7 +73,7 @@ async def echo_handler(message: types.Message) -> None:
 
 async def main() -> None:
     # Initialize Bot instance with a default parse mode which will be passed to all API calls
-    bot = Bot(TELEGRAM_TOKEN, parse_mode=ParseMode.HTML)
+    bot = Bot(config['TELEGRAM_TOKEN'], parse_mode=ParseMode.HTML)
     # starts running events polling and dispatching
     await dp.start_polling(bot)
 
