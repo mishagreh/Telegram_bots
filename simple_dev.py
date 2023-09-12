@@ -19,6 +19,8 @@ async def handle_updates(update):
     try:
         text = message['text']
         await send_message(chat_id, f'Эхо: {text}')
+
+
     except:
         # print(str(update))
         pass
