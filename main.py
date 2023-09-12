@@ -18,7 +18,11 @@ config = dotenv_values('.env')
 
 @dp.message(Command('weather'))
 async def command_weather_handler(message: Message) -> None:
-    """ `/weather` command handler """
+    """
+    `/weather` command handler
+    :param message:
+    :return:
+    """
 
     try:
         async with aiohttp.ClientSession() as session:
