@@ -8,7 +8,7 @@ from aiogram.filters import CommandStart, Command
 from aiogram.types import Message
 from aiogram.utils.markdown import hbold
 
-from config import TOKEN, OPEN_WEATHER_TOKEN
+from config import TELEGRAM_TOKEN, OPEN_WEATHER_TOKEN
 
 
 # All handlers should be attached to the Router (or Dispatcher)
@@ -73,12 +73,10 @@ async def echo_handler(message: types.Message) -> None:
 
 async def main() -> None:
     # Initialize Bot instance with a default parse mode which will be passed to all API calls
-    bot = Bot(TOKEN, parse_mode=ParseMode.HTML)
+    bot = Bot(TELEGRAM_TOKEN, parse_mode=ParseMode.HTML)
     # starts running events polling and dispatching
     await dp.start_polling(bot)
 
 
 if __name__ == "__main__":
     asyncio.run(main())
-
-    
