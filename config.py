@@ -1,1 +1,5 @@
-TOKEN = '6424303614:AAGL8Y-hDxJ-gNCnTc00IY4p6FL0pVFyNJY'
+# Telegram API bot token
+TOKEN = '...'
+
+# https://openweathermap.org
+OPEN_WEATHER_TOKEN = '...'
