@@ -1,0 +1,6 @@
+# Ignore files related to API keys
+config.py
+
+# Ignore all dev stage files
+*_dev.py
+

@@ -1,4 +1,6 @@
 import asyncio
+import aiohttp
+import datetime
 
 from aiogram import Bot, Dispatcher, types
 from aiogram.enums import ParseMode
@@ -6,18 +8,37 @@ from aiogram.filters import CommandStart, Command
 from aiogram.types import Message
 from aiogram.utils.markdown import hbold
 
-from config import TOKEN
+from config import TOKEN, OPEN_WEATHER_TOKEN
+
 
 # All handlers should be attached to the Router (or Dispatcher)
 # Initializes a dispatcher instance
 dp = Dispatcher()
 
 
-@dp.message(Command('custom'))
-async def command_help_handler(message: Message) -> None:
-    """ `/custom` command handler """
+@dp.message(Command('weather'))
+async def command_weather_handler(message: Message) -> None:
+    """ `/weather` command handler """
 
-    await message.answer(f"come up with the /custom command logic on your own!")
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(
+                    f'https://api.openweathermap.org/data/2.5/weather?'
+                    f'lat=49.8161282&lon=73.1026622&appid={OPEN_WEATHER_TOKEN}&units=metric') as response:
+
+                data = await response.json()
+                date_time = datetime.datetime.now()
+                await message.answer(f"Weather conditions in {data['name']}\n\n"
+                                     f"date: {date_time.day}_{date_time.month}_{date_time.year}\n"
+                                     f"time: {date_time.hour}:{date_time.minute}\n"
+                                     f"temperature: {data['main']['temp']} \u00B0C\n"
+                                     f"humidity: {data['main']['humidity']} %\n"
+                                     f"wind speed: {data['wind']['speed']} m/s\n\n"
+                                     f"feels like: {data['main']['feels_like']} \u00B0C\n"
+                                     f"text description: {data['weather'][0]['description']}")
+
+    except Exception as ex:
+        print(ex)
 
 
 @dp.message(Command('help'))
@@ -59,3 +80,4 @@ async def main() -> None:
 
 if __name__ == "__main__":
     asyncio.run(main())
+    
