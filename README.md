@@ -20,7 +20,7 @@ the bot handles it with async echo_handler function and
 reacts with sending the message back to the user.
 If a message consists of a command '/weather' the code runs 
 async command_weather_handle function, which creates an https request, 
-gets current weather conditions details from https://home.openweathermap.org/ 
+gets current weather conditions details from [openweather](https://home.openweathermap.org/)  
 and prints the data in the chat.
 
 Basically, this is it as of Sept, 13, 2023 :)
