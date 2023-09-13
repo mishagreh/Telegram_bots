@@ -7,7 +7,7 @@ in a single hardcoded city (Karaganda, Kazakhstan);
 3. handles three commands (/start, /help, /weather).
 
 
-![img.png](img.png)
+![bot_UI](images/img.png)
 
 **Some technical details**
 
@@ -28,7 +28,7 @@ Basically, this is it as of Sept, 13, 2023 :)
 For extra details, please inspect docs_in_html folder in the repository 
 or the source code itself. 
 
-![img_1.png](img_1.png)
+![bot_docs](images/img_1.png)
 
 
 
